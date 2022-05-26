@@ -22,29 +22,29 @@ const program = anchor.workspace.FacebookClone as Program<FacebookClone>;
 let creatorKey = provider.wallet.publicKey;
 let stateSigner;
 
-const run =  async () => {
-    [stateSigner] = await anchor.web3.PublicKey.findProgramAddress(
-      [utf8.encode('state')],
-      program.programId
-    );
+const run = async () => {
+  [stateSigner] = await anchor.web3.PublicKey.findProgramAddress(
+    [utf8.encode('state')],
+    program.programId
+  );
 
-    try{
-      const stateInfo = await program.account.stateAccount.fetch(stateSigner);
-      console.log(stateInfo);
-    }
-    catch{
-      await program.rpc.createState({
-        accounts: {
-          state: stateSigner,
-          authority: creatorKey,
-          ...defaultAccounts
-        },
-      })
-
-      const stateInfo = await program.account.stateAccount.fetch(stateSigner);
-      console.log(stateInfo);
-      assert(stateInfo.authority.toString() === creatorKey.toString(), "State Creator is Invalid");
-    }
+  try {
+    const stateInfo = await program.account.stateAccount.fetch(stateSigner);
+    console.log(stateInfo);
   }
+  catch {
+    await program.rpc.createState({
+      accounts: {
+        state: stateSigner,
+        authority: creatorKey,
+        ...defaultAccounts
+      },
+    })
+
+    const stateInfo = await program.account.stateAccount.fetch(stateSigner);
+    console.log(stateInfo);
+    assert(stateInfo.authority.toString() === creatorKey.toString(), "State Creator is Invalid");
+  }
+}
 
 run();

@@ -1,16 +1,16 @@
-import { useState } from 'react'
-import Image from 'next/image'
-import { AiOutlineSearch, AiFillHome } from 'react-icons/ai'
-import { BsDisplay } from 'react-icons/bs'
-import { RiGroup2Line } from 'react-icons/ri'
-import { SiFacebookgaming } from 'react-icons/si'
-import solanaLogo from '../assets/sol.png'
-import useWalletBalance from '../context/useWalletBalance'
-import { WalletMultiButton } from '@solana/wallet-adapter-react-ui'
-require('@solana/wallet-adapter-react-ui/styles.css')
+import { useState } from "react";
+import Image from "next/image";
+import { AiOutlineSearch, AiFillHome } from "react-icons/ai";
+import { BsDisplay } from "react-icons/bs";
+import { RiGroup2Line } from "react-icons/ri";
+import { SiFacebookgaming } from "react-icons/si";
+import solanaLogo from "../assets/sol.png";
+import useWalletBalance from "../context/useWalletBalance";
+import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
+require("@solana/wallet-adapter-react-ui/styles.css");
 
 const Header = ({ name, url }) => {
-  const [balance] = useWalletBalance()
+  const [balance] = useWalletBalance();
 
   const style = {
     wrapper: `flex items-center w-full h-[4rem] justify-around px-[1rem] py-[0.2rem] sticky top-0 bg-[#252526] shadow-[0px 5px 8px -9px rgba(0, 0, 0, 0.75)] z-20`,
@@ -30,23 +30,24 @@ const Header = ({ name, url }) => {
     balanceContainer: `bg-[#ec55bc] hover:bg-[#572079] text-black`,
     balanceIcon: `object-covers`,
     balanceText: `text-white font-bold ml-2`,
-  }
+  };
+
   return (
     <div className={style.wrapper}>
       <div className={style.headerLeft}>
         <Image
           className={style.facebookLogo}
-          src='https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Facebook_f_logo_%282019%29.svg/1200px-Facebook_f_logo_%282019%29.svg.png'
-          alt=''
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Facebook_f_logo_%282019%29.svg/1200px-Facebook_f_logo_%282019%29.svg.png"
+          alt=""
           height={30}
           width={30}
         />
         <div className={style.searchContainer}>
           <AiOutlineSearch />
           <input
-            type='text'
+            type="text"
             className={style.searchInput}
-            placeholder='Search Facebook'
+            placeholder="Search Facebook"
           />
         </div>
       </div>
@@ -67,14 +68,14 @@ const Header = ({ name, url }) => {
         </div>
       </div>
       <div className={style.headerRight}>
-        {name && (
+        {name && url && (
           <div className={`${style.userInfo} ${style.headerRightButton}`}>
             <Image
               src={url}
               height={20}
               width={20}
               className={style.userImage}
-              alt='user image'
+              alt="user image"
             />
             <div className={style.userName}>{name}</div>
           </div>
@@ -86,13 +87,13 @@ const Header = ({ name, url }) => {
             src={solanaLogo}
             height={20}
             width={20}
-            alt='solana logo'
+            alt="solana logo"
           />
           <div className={style.balanceText}>{balance.toFixed(2)} SOL</div>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

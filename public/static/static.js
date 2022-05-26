@@ -1,9 +1,9 @@
-import friendsIcon from '../assets/friends.png'
-import groupsIcon from '../assets/groups.png'
-import marketplaceIcon from '../assets/marketplace.png'
-import memoriesIcon from '../assets/memories.png'
-import watchIcon from '../assets/watch.png'
-import dropdownIcon from '../assets/dropdown.png'
+import friendsIcon from "../../assets/friends.png";
+import groupsIcon from "../../assets/groups.png";
+import marketplaceIcon from "../../assets/marketplace.png";
+import memoriesIcon from "../../assets/memories.png";
+import watchIcon from "../../assets/watch.png";
+import dropdownIcon from "../../assets/dropdown.png";
 
 export const sidebarData = [
   {
@@ -30,4 +30,4 @@ export const sidebarData = [
     icon: dropdownIcon,
     title: `See more`,
   },
-]
+];

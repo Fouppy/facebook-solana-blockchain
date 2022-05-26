@@ -1,19 +1,14 @@
-import Comment from './Comment'
-import CreateComment from './CreateComment'
+import Comment from "./Comment";
+import CreateComment from "./CreateComment";
 
-const CommentSection = ({
-  comments,
-  createCommentForPost,
-  name,
-  url,
-}) => {
+const CommentSection = ({ comments, createCommentForPost, name, url }) => {
   const style = {
     wrapper: `w-full rounded-b-lg p-[5px] flex justify-center-center flex-col border-t border-gray-300 border-[#3a3b3e] pt-4`,
-  }
+  };
 
   return (
     <div className={style.wrapper}>
-      {comments.map((comment, index) => (
+      {comments?.map((comment, index) => (
         <Comment comment={comment} key={index} />
       ))}
       <CreateComment
@@ -22,7 +17,7 @@ const CommentSection = ({
         url={url}
       />
     </div>
-  )
-}
+  );
+};
 
-export default CommentSection
+export default CommentSection;

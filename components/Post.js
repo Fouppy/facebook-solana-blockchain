@@ -1,15 +1,15 @@
-import { useState, useEffect } from 'react'
-import Image from 'next/image'
-import { BiLike } from 'react-icons/bi'
-import { FaRegCommentAlt } from 'react-icons/fa'
-import { FiRefreshCw } from 'react-icons/fi'
-import CommentSection from './CommentSection'
-import TimeAgo from 'javascript-time-ago'
-import en from 'javascript-time-ago/locale/en.json'
+import { useState, useEffect } from "react";
+import Image from "next/image";
+import { BiLike } from "react-icons/bi";
+import { FaRegCommentAlt } from "react-icons/fa";
+import { FiRefreshCw } from "react-icons/fi";
+import CommentSection from "./CommentSection";
+import TimeAgo from "javascript-time-ago";
+import en from "javascript-time-ago/locale/en.json";
 
-TimeAgo.addDefaultLocale(en)
+TimeAgo.addLocale(en);
 
-const timeAgo = new TimeAgo('en-US')
+const timeAgo = new TimeAgo("en-US");
 
 const Post = ({ post, viewDetail, createComment, name, url }) => {
   const style = {
@@ -24,44 +24,46 @@ const Post = ({ post, viewDetail, createComment, name, url }) => {
     reactionItem: `flex flex-1 items-center justify-center rounded-[0.4rem] hover:bg-[#404041] py-2`,
     reactionsText: `ml-[1rem]`,
     refreshIcon: `text-blue-500`,
-  }
+  };
 
-  const [isCommentSectionOpened, setIsCommentSectionOpened] = useState(false)
-  const [comments, setComments] = useState([])
-
-  useEffect(() => {
-    postDetail()
-  }, [postDetail])
+  const [isCommentSectionOpened, setIsCommentSectionOpened] = useState(false);
+  const [comments, setComments] = useState([]);
 
   useEffect(() => {
-    if (comments.length > 0) {
-      setIsCommentSectionOpened(true)
+    postDetail();
+  }, [postDetail]);
+
+  useEffect(() => {
+    if (comments?.length > 0) {
+      setIsCommentSectionOpened(true);
     }
-  }, [comments])
+  }, [comments]);
 
-  const clockToDateString = timestamp =>
-    timeAgo.format(new Date(timestamp.toNumber() * 1000), 'twitter-now')
+  const clockToDateString = (timestamp) =>
+    timeAgo.format(new Date(timestamp.toNumber() * 1000), "twitter-now");
 
   const postDetail = async () => {
-    const result = await viewDetail(post.index, post)
+    const result = await viewDetail(post.index, post);
 
-    setComments(await result)
-  }
+    setComments(await result);
+  };
 
-  const createCommentForPost = async text => {
-    createComment(text, post.index, post.commentCount)
-  }
+  const createCommentForPost = async (text) => {
+    createComment(text, post.index, post.commentCount);
+  };
 
   return (
     <div className={style.wrapper}>
       <div className={style.postPublisher}>
-        <Image
-          src={post.posterUrl}
-          className={style.avatar}
-          height={44}
-          width={44}
-          alt='publisher profile image'
-        />
+        {post.posterUrl && (
+          <Image
+            src={post.posterUrl}
+            className={style.avatar}
+            height={44}
+            width={44}
+            alt="publisher profile image"
+          />
+        )}
         <div className={style.publisherDetails}>
           <div className={style.name}>{post.posterName}</div>
           <div className={style.timestamp}>
@@ -100,7 +102,7 @@ const Post = ({ post, viewDetail, createComment, name, url }) => {
         />
       )}
     </div>
-  )
-}
+  );
+};
 
-export default Post
+export default Post;

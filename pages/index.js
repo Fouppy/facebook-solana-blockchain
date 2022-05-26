@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react'
-import { useWallet } from '@solana/wallet-adapter-react'
-import SignUp from '../components/SignUp'
-import Header from '../components/Header'
-import Feed from '../components/Feed'
-import RightSidebar from '../components/RightSidebar'
-import Sidebar from '../components/Sidebar'
+import { useState, useEffect } from "react";
+import { useWallet } from "@solana/wallet-adapter-react";
+import SignUp from "../components/SignUp";
+import Header from "../components/Header";
+import Feed from "../components/Feed";
+import RightSidebar from "../components/RightSidebar";
+import Sidebar from "../components/Sidebar";
 
 const style = {
   wrapper: `bg-[#18191a] min-h-screen duration-[0.5s]`,
@@ -12,32 +12,32 @@ const style = {
   center: `flex-1`,
   main: `flex-1 flex justify-center`,
   signupContainer: `flex items-center justify-center w-screen h-[70vh]`,
-}
+};
 
 export default function Home() {
-  const [registered, setRegistered] = useState(false)
-  const [name, setName] = useState('')
-  const [url, setUrl] = useState('')
-  const [users, setUsers] = useState([])
+  const [registered, setRegistered] = useState(false);
+  const [name, setName] = useState("");
+  const [url, setUrl] = useState("");
+  const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    ;(async () => {
-      await requestUsersData()
-    })()
-  }, [])
+    (async () => {
+      await requestUsersData();
+    })();
+  }, []);
 
-  const wallet = useWallet()
+  const wallet = useWallet();
 
-  const requestUsersData = async activeAccount => {
+  const requestUsersData = async (activeAccount) => {
     try {
-      const response = await fetch(`/api/fetchUsers`)
-      const data = await response.json()
+      const response = await fetch(`/api/fetchUsers`);
+      const data = await response.json();
 
-      setUsers(data.data)
+      setUsers(data.data);
     } catch (error) {
-      console.error(error)
+      console.error(error);
     }
-  }
+  };
 
   return (
     <div className={style.wrapper}>
@@ -67,5 +67,5 @@ export default function Home() {
         </div>
       )}
     </div>
-  )
+  );
 }
